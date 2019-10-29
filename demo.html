@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>高精度四则运算</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .content {
+            padding: 10px 15px;
+        }
+        .item {
+            padding: 5px;
+            font-size: 14px;
+        }
+        .item-title {
+            font-size: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <h3 style="text-align: center">高精度四则运算</h3>
+    <div class="item">
+        <p class="item-title">主要依赖</p>
+        <a href="http://mikemcl.github.io/big.js/" target="_blank" title="点击查看">big.js</a>
+    </div>
+    <div class="item">
+        <p class="item-title">使用：</p>
+        <pre>let result = countFn([1, '/', 3, '+', '(', 0.1, '+', -0.2, ')']);<br/>console.log(result) // 0.23333333333333334</pre>
+    </div>
+    <div class="item">
+        <p class="item-title">计算结果示例：</p>
+        <div id="result"></div>
+    </div>
+    <div class="item">
+        <p class="item-title">源码地址：</p>
+        <a href="https://zperli.cn" target="_blank">https://zperli.cn</a>
+    </div>
+</div>
+<script src="big.min.js"></script>
+<script src="count.js"></script>
+<script>
+    let countArray = [
+      { id: 1, formula: [0.1, '+', 0.2] },
+      { id: 2, formula: [0.2, '*', '(', 0.1, '+', 0.2, ')'] },
+      { id: 3, formula: [1, '/', 3, '+', '(', 0.1, '+', -0.2, ')'] }
+    ];
+    countArray.forEach(m => {
+      let result = countFn(m.formula);
+      let formula = `${m.formula} = `;
+      formula = formula.replace(/,/g, ' ');
+      let p = document.createElement('p');
+      p.innerText = formula + result;
+      document.getElementById('result').append(p);
+    });
+</script>
+</body>
+</html>
